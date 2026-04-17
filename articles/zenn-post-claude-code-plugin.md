@@ -3,7 +3,7 @@ title: "「記事公開して」だけでZennとdev.toに同時投稿できるCl
 emoji: "📝"
 type: "tech"
 topics: ["claudecode", "zenn", "devto", "ai"]
-published: false
+published: true
 ---
 
 Claude Codeに「記事公開して」と言うだけで、Zenn（日本語）とdev.to（英訳）に同時投稿してくれるプラグインを作りました。
