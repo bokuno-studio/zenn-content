@@ -22,7 +22,7 @@ published: false
 
 ## プロダクト概要
 
-**Stride Mate** は、LINEで話しかけると自分のGarminトレーニングデータを踏まえて答えてくれるAIコーチ。
+**Stride Mate**（https://training-coach-bot-xi.vercel.app ）は、LINEで話しかけると自分のGarminトレーニングデータを踏まえて答えてくれるAIコーチ。
 
 - 「先週の練習どうだった？」
 - 「来月のレースに向けて今週何をすべき？」
