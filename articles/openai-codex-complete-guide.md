@@ -3,7 +3,7 @@ title: "OpenAI Codex デスクトップ完全ガイド — Skills・Plugins・Au
 emoji: "🤖"
 type: "tech"
 topics: ["openai", "codex", "ai", "automation", "生産性"]
-published: false
+published: true
 ---
 
 :::message
