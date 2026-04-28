@@ -6,6 +6,12 @@ topics: ["openai", "codex", "ai", "automation", "生産性"]
 published: false
 ---
 
+:::message
+この記事は [@DeRonin_](https://x.com/DeRonin_) さんによる以下の X ポストの動画（約103分）を日本語でまとめたものです。
+:::
+
+@[tweet](https://twitter.com/DeRonin_/status/2048823420977119727)
+
 ## はじめに
 
 OpenAI Codex のデスクトップアプリは、コーディング支援にとどまらず、デザイン・ドキュメント作成・調査・自動化まで幅広く対応できる AI エージェントプラットフォームです。この記事では約 103 分の完全ガイド動画の内容を日本語でまとめます。
