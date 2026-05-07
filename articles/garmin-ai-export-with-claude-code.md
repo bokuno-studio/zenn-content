@@ -137,7 +137,7 @@ for (let offset = 0; offset < buffer.length; offset += chunkSize) {
 
 > 一番のリスクは iOS Safari で支払い後に Blob が復元できないケース
 
-これが本当に起きる。iOS Safariには **IndexedDBに保存した Blob を取り出すと壊れている** という長年の不具合があり、特に大きい Blob で顕著に出る。¥1,200払ったのにダウンロードできない、は最悪のUXなので、
+これが本当に起きる。iOS Safariには **IndexedDBに保存した Blob を取り出すと壊れている** という長年の不具合があり、特に大きい Blob で顕著に出る。お金払ったのにダウンロードできない、は最悪のUXなので、
 
 ```ts
 // Blob → ArrayBuffer に変換してから保存
@@ -167,16 +167,15 @@ export function abortConversion() {
 
 ## 決済を載せる
 
-ダウンロード時に **¥1,200の課金** を載せた。
+ダウンロード時に課金ゲートを載せた。
 
 ### なぜSquare？
 
 候補は Stripe / PayPal / Square / Paddle あたり。今回 Square を選んだ理由：
 
-- **日本円のオンライン決済が普通にできる**（Stripeはできるけど審査が重め）
+- **Stripeは申請が通らなかった**（個人事業ベースで時間がかかる）
 - **Apple Pay / Google Pay がデフォルトで載る**（追加実装ゼロ）
 - **Payment Links API でホスト型チェックアウトが秒で作れる** — 自分のサイトにカード入力フォームを実装する必要がない（PCI DSS対応も不要）
-- **手数料が3.6%**（オンラインの場合、JCBは3.95%）
 
 実装は驚くほど簡単で、サーバー側はAPI経由で決済リンクを作るだけ：
 
@@ -195,7 +194,7 @@ const squareResponse = await fetch(
       idempotency_key: crypto.randomUUID(),
       quick_pay: {
         name: "Garmin AI Export",
-        price_money: { amount: 1200, currency: "JPY" },
+        price_money: { amount: PRICE, currency: "JPY" },
         location_id: process.env.SQUARE_LOCATION_ID,
       },
       checkout_options: {
@@ -240,10 +239,6 @@ Vercel Hobby プランは **「personal, non-commercial use」** 限定。決済
 - 決済画面 → Squareのドメイン（Vercel経由しない）
 
 Vercel を通るのは **初回のページロード（〜2MB）** と Square API 呼び出し（〜1KB）だけ。Pro の 1TB 帯域なら 50万ユーザー分は余裕。クライアント完結アーキテクチャの恩恵がここで効く。
-
-### 決済手数料
-
-¥1,200 → 着金 ¥1,153〜1,157（カード種別による）。月3件売れれば Pro の固定費は回収できる。
 
 ## GA4 と ファビコン
 
