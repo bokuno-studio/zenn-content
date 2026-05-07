@@ -8,7 +8,7 @@ published: false
 
 :::message
 この記事は @angeldot_ さんによる以下の X ポストの動画（約30分）を日本語でまとめたものです。
-登壇者: Ivan Arginya（Google Cloud Developer）/ Anthropic 主催イベントにて収録
+登壇者: Ivan Nardini（Google Cloud Developer Relations Engineer, AI/ML）/ Anthropic 主催イベントにて収録
 :::
 
 @[tweet](https://x.com/angeldot_/status/2052104456846622957?s=20)
