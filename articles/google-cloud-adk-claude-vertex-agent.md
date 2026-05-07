@@ -15,7 +15,7 @@ published: true
 
 ## はじめに
 
-AIエージェントの開発はできた。でも本番に出せない——そんな壁を Google Cloud の Ivan Arginya が 30 分で突破する方法を実演したワークショップです。
+AIエージェントの開発はできた。でも本番に出せない——そんな壁を Google Cloud の Ivan Nardini が 30 分で突破する方法を実演したワークショップです。
 
 ADK・MCP・Vertex AI Agent Engine・A2A Protocol の4本柱を使い、Claude を脳みそにしたマルチエージェントシステムを構築・デプロイするまでを一気通貫で解説しています。
 
