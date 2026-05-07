@@ -307,5 +307,3 @@ export function createAppIconResponse(size: { width: number; height: number }) {
 Garminユーザーで自分の活動データをChatGPTやClaudeで分析してみたい人がいたら、ぜひ使ってみてください。
 
 🔗 **https://garmin-ai-export.vercel.app**
-
-ソースは GitHub に公開してます: https://github.com/bokuno-studio/garmin-ai-export
