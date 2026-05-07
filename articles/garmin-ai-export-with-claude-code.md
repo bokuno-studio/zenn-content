@@ -1,8 +1,8 @@
 ---
-title: "Claude Codeでガーミンの過去データをAIに食わせるWebアプリを1日で作った"
+title: "Claude Code + Codexでガーミンの過去データをAIに食わせるWebアプリを1日で作った"
 emoji: "⌚"
 type: "tech"
-topics: ["claudecode", "nextjs", "typescript", "garmin", "square"]
+topics: ["claudecode", "codex", "nextjs", "typescript", "square"]
 published: false
 ---
 
@@ -26,7 +26,7 @@ published: false
 
 ChatGPTやGeminiやClaudeのCode Interpreterに食わせるとそのまま「ペースの推移を分析して」「睡眠と次の日のパフォーマンス相関見て」といった分析が動く。
 
-そしてこれを **Claude Code（Opus 4.7）と一緒に半日くらいで作ってデプロイ・決済まで載せた** という話。
+そしてこれを **Claude Code（Opus 4.7）と Codex（GPT-5 Codex）の2体を組ませて、半日くらいで作ってデプロイ・決済まで載せた** という話。 役割分担は後述するけど、Claude Code が PdM・レビュアー、Codex が実装担当という分業をした。
 
 ## 技術スタック
 
@@ -43,25 +43,37 @@ ChatGPTやGeminiやClaudeのCode Interpreterに食わせるとそのまま「ペ
 
 なのでアップロードもパースも変換もダウンロードも、全部ユーザーのブラウザの中で完結させた。サーバーは決済リンクの発行APIだけ。
 
-## Claude Codeとの開発フロー
+## Claude Code × Codex の役割分担
 
-今回は完全に **チケット駆動** で進めた。
+今回の開発は2体のAIエージェントを **役割を明確に分けて** 回した。
+
+| 役割 | 担当 | やること |
+|------|------|----------|
+| **PdM / リサーチ** | Claude Code (Opus 4.7) | 要望を聞いて GitHub Issue 起票、ラベル管理、優先度判断 |
+| **実装** | Codex (GPT-5 Codex) | ブランチ切る、コード書く、Draft PR を上げる |
+| **コードレビュー** | Claude Code (Opus 4.7) | PR の diff を読んで辛口レビュー、GitHubに行番号付きコメント |
+| **マージ・デプロイ** | Claude Code (Opus 4.7) | LGTM 出して squash merge、本番疎通確認 |
+| **承認・GO判断** | ぼく（人間） | 「OK」「実装して」「マージして」を言うだけ |
+
+実際のフローはこんな感じ：
 
 ```
-要望を伝える → Claudeが GitHub Issue を作成（triageラベル付き）
-→ ぼくが「OK」と承認 → ready ラベル
-→ ぼくが「#XX 実装して」と指示
-→ Claudeが実装してDraft PRを上げる
-→ ぼくが「レビューお願い」とリクエスト
-→ Claudeが辛口レビューしてGitHubコメント投稿
-→ codex（自分自身）が修正
-→ 再レビュー → LGTMでマージ
-→ Vercel自動デプロイ
+要望を伝える
+  → Claude Code が GitHub Issue 起票（triageラベル付き）
+  → ぼくが「OK」と承認 → readyラベル
+  → ぼくが「#XX 実装して」
+  → Codex がブランチ切って実装してDraft PR
+  → ぼくが「レビューお願い」
+  → Claude Code が辛口レビューしてGitHubコメント投稿
+  → Codex が修正
+  → Claude Code が再レビュー → LGTMでマージ
+  → Vercel自動デプロイ
+  → Claude Code が curl で疎通確認
 ```
 
-つまり Claude Code は **PdM・実装者・レビュアーの3役** をこなしている。ぼくは「やりたい」「OK」「マージして」を言うだけ。
+このスタイルの面白いところは、**実装者とレビュアーを別モデルにすると本気で辛口になる** こと。Codex が書いたコードを Claude Code が読むと、自己肯定バイアスが効かないので「`disabled={!result}` は dead code」「JSZip の private API を掴んでる」「Worker が terminate されない」みたいな細かい指摘が次々出てくる。同じモデルにレビューさせるとこうはいかない。
 
-「実装」と「レビュー」を別人格としてやらせるのが結構効いていて、実装側でハードコードしたconstantsをレビュー側がしっかり指摘して直させる、みたいな自浄作用が出た。
+ぼくは「やりたい」「OK」「マージして」を言うだけで、コードは1行も書いてない。
 
 ## ハマりどころ
 
@@ -274,19 +286,20 @@ export function createAppIconResponse(size: { width: number; height: number }) {
 }
 ```
 
-## Claude Codeで作ってみての所感
+## Claude Code × Codex で作ってみての所感
 
 **良かった点**
 
-- 「ガーミンZIPのこの構造を解析するCSV変換アプリを」と要望を投げると、調査→Issue起票→実装→レビュー→修正→マージまで全部回せる
-- レビューを別ターンで頼むと、本気で辛口になる。「L514 の `disabled={!result}` は dead code」みたいな細かい指摘までしっかり拾う
-- ハマったときも「iOS Safari のIndexedDBでBlobが壊れる既知問題があるので ArrayBuffer に変換して保存する」みたいな解決策を即出せる
+- **役割分担すると速い**: Claude Code が要件整理・レビューに専念し、Codex が黙々と実装する分業は、人間1人 + AI複数の編成として相性が良い
+- **モデルが違うとレビューが効く**: 同じモデルが書いてレビューすると見落としが多いが、別モデルだと「これおかしくない？」を遠慮なく出してくる
+- ハマったときも「iOS Safari の IndexedDB で Blob が壊れる既知問題があるので ArrayBuffer に変換して保存する」のような解決策を Claude Code が即出せた
+- Codex は CLI から直接呼べるので、Bash 経由で「このIssueの内容で実装してPR出して」と一発投げられる
 
 **気をつけた点**
 
-- 「いいかも」「やりたい」と言うだけで実装を始めさせない。明示的に「#XX 実装して」と指示するルール（CLAUDE.mdに書いた）
-- レビューは別ターンで頼むことで、実装者の自己肯定バイアスを切る
-- デプロイは「マージして」ではなく「main に出して」「本番に出して」と明示する
+- 「いいかも」「やりたい」と言うだけで実装を始めさせない。明示的に「#XX 実装して」と指示するルール（CLAUDE.mdに明記）
+- レビューは必ず別モデル（Claude Code）に頼んで、実装者（Codex）の自己肯定バイアスを切る
+- デプロイは「マージして」ではなく「main に出して」「本番に出して」と明示するルール
 
 「軽いノリで作りたい」をそのまま進められるのは強烈に楽。一方で **何も考えずにOKを出すと進みすぎる** ので、レビューと承認の儀式を挟む価値はある。
 
@@ -294,7 +307,7 @@ export function createAppIconResponse(size: { width: number; height: number }) {
 
 - 半日でちゃんと **ペイメント・分析・ファビコンまで載った状態のWebアプリ** が作れた
 - ブラウザ完結アーキテクチャでサーバーコストもプライバシーも両立
-- Claude Codeと **チケット駆動 + 実装/レビュー分離** で回すと、品質を犠牲にせず速度を出せる
+- **Claude Code（PdM・レビュアー）+ Codex（実装）の二人体制** で回すと、品質を犠牲にせず速度を出せる
 
 Garminユーザーで自分の活動データをChatGPTやClaudeで分析してみたい人がいたら、ぜひ使ってみてください。
 
