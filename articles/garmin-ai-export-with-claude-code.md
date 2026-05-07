@@ -3,7 +3,7 @@ title: "Claude Code + Codexでガーミンの過去データをAIに食わせる
 emoji: "⌚"
 type: "tech"
 topics: ["claudecode", "codex", "nextjs", "typescript", "square"]
-published: false
+published: true
 ---
 
 :::message
