@@ -1,5 +1,5 @@
 ---
-title: "Claude CodeとCodexを2ヶ月ガチ使いしたらトークン40億消費してた話"
+title: "Claude CodeとCodexを使い込んだら月に37億トークン消費してた話"
 emoji: "📊"
 type: "tech"
 topics: ["claudecode", "codex", "openai", "anthropic", "llm"]
