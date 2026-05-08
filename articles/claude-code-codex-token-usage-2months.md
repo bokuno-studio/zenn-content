@@ -122,8 +122,3 @@ Codexのinputの特徴として、**93%がcached input**だった。モデルが
 
 計測してみて、「なんとなく使ってる」の解像度が上がった。特にキャッシュ比率とAgent並列実行の影響は、意識していないと見えてこない部分だった。
 
----
-
-**計測に使ったツール**
-- Claude Code トークン集計: [ccusage](https://github.com/ryoppippi/ccusage)
-- Codex ログ: `~/.codex/sessions/` 配下のJSONセッションログ
