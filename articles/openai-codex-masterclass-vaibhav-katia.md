@@ -1,5 +1,5 @@
 ---
-title: "OpenAI Codexマスタークラス: プラグイン・サブエージェント・Hooks を62分で完全解説【AI Engineer Europe 2026】"
+title: "OpenAI Codexマスタークラス: プラグイン・サブエージェント・Hooks を62分で完全解説"
 emoji: "🤖"
 type: "tech"
 topics: ["openai", "codex", "aiagent", "mcp", "githubactions"]
