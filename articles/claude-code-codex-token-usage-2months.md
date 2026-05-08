@@ -11,14 +11,12 @@ published: false
 ## 計測方法
 
 **Claude Code**
-[ccusage](https://github.com/ryoppippi/ccusage) というCLIツールを使った。Claude Codeが`~/.claude/projects/`配下に残すJSONLファイルをパースして、モデル別・月次のトークン数を集計してくれる。
-
-```bash
-npx ccusage@latest
-```
+Claude Codeは`~/.claude/projects/`配下にJSONL形式で会話ログを残す。各レコードにモデル名・タイムスタンプ・input/output/cache_creation/cache_readトークン数が含まれているので、これをパースして月次・モデル別に集計した。
 
 **Codex**
-`~/.codex/sessions/2026/03-04/` に残るセッションログ（JSONファイル）の`token_count`フィールドを日付・モデル別に集計。
+Codexは`~/.codex/sessions/`配下にセッション単位でJSONファイルを残す。ファイルの末尾に`token_count`オブジェクトがあり、`input`・`output`・`cached_input`・`reasoning_output`の内訳が記録されている。ファイル名のタイムスタンプ（Asia/Tokyo）とモデル名を使って日次・モデル別に集計した。
+
+Claudeと違い、Codexのログには実課金額が含まれないためコスト計算はできていない。
 
 ---
 
