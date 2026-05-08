@@ -3,7 +3,7 @@ title: "GarminデータをGoPro動画に重ねるMacアプリを作ってMac App
 emoji: "🎬"
 type: "idea"
 topics: ["swift", "macos", "個人開発", "avfoundation", "appstore"]
-published: false
+published: true
 ---
 
 :::message
