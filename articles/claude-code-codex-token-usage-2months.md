@@ -3,7 +3,7 @@ title: "Claude CodeとCodexを使い込んだら月に37億トークン消費し
 emoji: "📊"
 type: "tech"
 topics: ["claudecode", "codex", "openai", "anthropic", "llm"]
-published: false
+published: true
 ---
 
 :::message
