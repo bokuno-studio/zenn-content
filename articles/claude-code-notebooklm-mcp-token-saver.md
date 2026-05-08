@@ -3,7 +3,7 @@ title: "Claude Code + NotebookLM MCPでトークン節約しながらAI調査を
 emoji: "📓"
 type: "tech"
 topics: ["claudecode", "notebooklm", "mcp", "ai", "automation"]
-published: false
+published: true
 ---
 
 :::message
@@ -11,7 +11,7 @@ published: false
 個人の学習・整理目的のメモです。内容の正確性はご自身でご確認ください。なお、元動画はスペイン語のため、日本語への翻訳を含みます。
 :::
 
-https://x.com/saidstetic/status/2052469867173781817
+https://www.youtube.com/watch?v=3X37O0rLq8k
 
 ## はじめに
 
