@@ -3,7 +3,7 @@ title: "Dario Amodei × Dwarkesh Patel 対談：AI進化・エージェント経
 emoji: "🧠"
 type: "idea"
 topics: ["anthropic", "claude", "aiagent", "agi", "llm"]
-published: false
+published: true
 ---
 
 :::message
