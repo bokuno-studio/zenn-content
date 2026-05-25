@@ -3,7 +3,7 @@ title: "人の役割は『目的を磨く』と『最終判断』の 2 点に集
 emoji: "🎯"
 type: "idea"
 topics: ["AI", "資料作成", "プレゼン", "claudecode", "働き方"]
-published: false
+published: true
 ---
 
 ## はじめに
