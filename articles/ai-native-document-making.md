@@ -2,7 +2,7 @@
 title: "人の役割は『目的を磨く』と『最終判断』の 2 点に集中する — AI ネイティブな資料作成"
 emoji: "🎯"
 type: "idea"
-topics: ["AI", "資料作成", "プレゼン", "claudecode", "働き方"]
+topics: ["ai", "claudecode", "writing", "productivity", "career"]
 published: true
 ---
 
