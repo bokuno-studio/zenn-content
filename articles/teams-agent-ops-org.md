@@ -2,7 +2,7 @@
 title: "事業の「運営」を AI 組織に任せてみた — 発散して、畳んで、固定費にするまで"
 emoji: "🏢"
 type: "idea"
-topics: ["AIエージェント", "ClaudeCode", "個人開発", "業務自動化", "AI"]
+topics: ["aiエージェント", "claudecode", "個人開発", "業務自動化", "ai"]
 published: true
 ---
 
